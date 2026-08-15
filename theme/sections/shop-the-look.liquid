@@ -1,0 +1,46 @@
+<section class="section shop-look-section" style="background-color:var(--color-bg-secondary);">
+  <div class="container">
+    <div class="section-header">
+      <div class="subheading">EDITORIAL LOOKBOOK</div>
+      <h2 class="heading-lg section-header__title">SHOP THE LOOK</h2>
+      <p class="section-header__desc">Click on the pulse hotspots to explore and shop items featured in our seasonal lookbook.</p>
+    </div>
+
+    <div class="shop-look">
+      <div class="shop-look__canvas">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=85" alt="Shop The Look Lifestyle" style="width:100%;height:560px;object-fit:cover;">
+        
+        <!-- Hotspot 1 -->
+        <button type="button" class="shop-look__hotspot" style="top:35%;left:48%;" data-target-popover="look-popover-1" aria-label="View Sunglasses">
+          +
+        </button>
+        <div id="look-popover-1" class="shop-look__popover" style="top:40%;left:48%;">
+          <div style="font-weight:600;font-size:0.875rem;">VALERIA MONARCH BLACK</div>
+          <div style="color:var(--color-accent);font-size:0.85rem;margin:4px 0 8px 0;">₹2,999.00</div>
+          <a href="/products/valeria-monarch-black" class="btn btn-primary" style="padding:6px 12px;font-size:0.7rem;width:100%;">QUICK VIEW</a>
+        </div>
+
+        <!-- Hotspot 2 -->
+        <button type="button" class="shop-look__hotspot" style="top:65%;left:54%;" data-target-popover="look-popover-2" aria-label="View Chronograph Watch">
+          +
+        </button>
+        <div id="look-popover-2" class="shop-look__popover" style="top:70%;left:54%;">
+          <div style="font-weight:600;font-size:0.875rem;">LUMIÈRE CHRONOGRAPH GOLD</div>
+          <div style="color:var(--color-accent);font-size:0.85rem;margin:4px 0 8px 0;">₹8,499.00</div>
+          <a href="/products/lumiere-chronograph-gold" class="btn btn-primary" style="padding:6px 12px;font-size:0.7rem;width:100%;">QUICK VIEW</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop The Look",
+  "presets": [
+    {
+      "name": "Shop The Look"
+    }
+  ]
+}
+{% endschema %}

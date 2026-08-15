@@ -1,0 +1,49 @@
+<section class="section main-cart-section">
+  <div class="container" style="max-width:800px;">
+    {% render 'breadcrumbs' %}
+    <h1 class="heading-lg" style="margin-bottom:32px;">YOUR SHOPPING BAG</h1>
+
+    {% if cart.item_count > 0 %}
+      <form action="/cart" method="post">
+        <div class="cart-items-list" style="margin-bottom:32px;">
+          {% for item in cart.items %}
+            <div class="cart-item" style="display:flex;gap:20px;padding:16px 0;border-bottom:1px solid var(--color-border);">
+              <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" style="width:100px;height:120px;object-fit:cover;border-radius:4px;">
+              <div style="flex-grow:1;">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:6px;">{{ item.product.title }}</h3>
+                <div style="color:var(--color-text-muted);font-size:0.85rem;margin-bottom:8px;">{{ item.variant.title }}</div>
+                <div style="font-weight:600;color:var(--color-accent);">{{ item.final_price | money }}</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:50px;padding:6px;text-align:center;border:1px solid var(--color-border);border-radius:4px;">
+                <a href="/cart/change?line={{ forloop.index }}&quantity=0" style="color:var(--color-sale);font-size:0.85rem;">Remove</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding:24px;background:var(--color-bg-secondary);border-radius:var(--radius-md);">
+          <div style="font-size:1.2rem;font-weight:600;">SUBTOTAL</div>
+          <div style="font-size:1.4rem;font-weight:700;color:var(--color-text-primary);">{{ cart.total_price | money }}</div>
+        </div>
+
+        <div style="display:flex;gap:16px;justify-content:flex-end;">
+          <button type="submit" name="update" class="btn btn-secondary">UPDATE CART</button>
+          <button type="submit" name="checkout" class="btn btn-primary">PROCEED TO CHECKOUT</button>
+        </div>
+      </form>
+    {% else %}
+      <div style="text-align:center;padding:60px 0;">
+        <p style="color:var(--color-text-muted);margin-bottom:24px;">Your shopping bag is currently empty.</p>
+        <a href="/collections/all" class="btn btn-primary">EXPLORE COLLECTIONS</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Cart",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+{
+  "current": {
+    "color_bg_primary": "#FAF8F5",
+    "color_bg_secondary": "#F3EFEA",
+    "color_text_primary": "#0F0F10",
+    "color_accent": "#C5A880",
+    "color_sale": "#9B2C2C",
+    "announcement_bar_enable": true,
+    "announcement_bar_text": "COMPLIMENTARY EXPRESS SHIPPING ON ORDERS ABOVE ₹999 | VALERIA & CO.",
+    "logo_width": 180,
+    "sticky_header": true,
+    "free_shipping_threshold": 999
+  }
+}

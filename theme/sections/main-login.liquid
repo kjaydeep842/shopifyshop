@@ -1,0 +1,36 @@
+<section class="section main-login-section">
+  <div class="container" style="max-width:440px;">
+    {% render 'breadcrumbs' %}
+    <div style="background:var(--color-bg-surface);padding:40px 32px;border-radius:var(--radius-md);border:1px solid var(--color-border);box-shadow:var(--shadow-sm);">
+      <h1 class="heading-md" style="margin-bottom:8px;text-align:center;">WELCOME BACK</h1>
+      <p style="text-align:center;color:var(--color-text-muted);font-size:0.875rem;margin-bottom:32px;">Log in to access your orders and saved wishlist.</p>
+
+      {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+
+        <div style="margin-bottom:20px;">
+          <label for="CustomerEmail" style="display:block;font-size:0.8rem;font-weight:600;text-transform:uppercase;margin-bottom:6px;">Email Address</label>
+          <input type="email" name="customer[email]" id="CustomerEmail" required style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:4px;font-family:var(--font-body);">
+        </div>
+
+        <div style="margin-bottom:24px;">
+          <label for="CustomerPassword" style="display:block;font-size:0.8rem;font-weight:600;text-transform:uppercase;margin-bottom:6px;">Password</label>
+          <input type="password" name="customer[password]" id="CustomerPassword" required style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:4px;font-family:var(--font-body);">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" style="margin-bottom:16px;">SIGN IN</button>
+      {% endform %}
+
+      <div style="text-align:center;font-size:0.85rem;color:var(--color-text-muted);">
+        Don't have an account? <a href="/account/register" style="color:var(--color-accent);font-weight:600;">Create Account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Login",
+  "settings": []
+}
+{% endschema %}

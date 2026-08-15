@@ -1,0 +1,47 @@
+<section class="section main-list-collections-section">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+    <h1 class="heading-lg" style="margin-bottom:40px;text-align:center;">OUR LUXURY COLLECTIONS</h1>
+
+    <div class="category-grid">
+      {% for collection in collections %}
+        <div class="category-card">
+          {% if collection.image %}
+            <img src="{{ collection.image | image_url: width: 800 }}" alt="{{ collection.title | escape }}">
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80" alt="{{ collection.title | escape }}">
+          {% endif %}
+          <div class="category-card__overlay">
+            <h3 class="heading-md category-card__title">{{ collection.title }}</h3>
+            <p class="category-card__subtitle">{{ collection.products_count }} items</p>
+            <a href="{{ collection.url }}" class="btn btn-outline-white" style="align-self:flex-start;">EXPLORE COLLECTION</a>
+          </div>
+        </div>
+      {% else %}
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80" alt="Sunglasses">
+          <div class="category-card__overlay">
+            <h3 class="heading-md category-card__title">LUXURY EYEWEAR</h3>
+            <p class="category-card__subtitle">UV400 Polarized Frames</p>
+            <a href="/collections/sunglasses" class="btn btn-outline-white" style="align-self:flex-start;">SHOP SUNGLASSES</a>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Timepieces">
+          <div class="category-card__overlay">
+            <h3 class="heading-md category-card__title">PRECISION TIMEPIECES</h3>
+            <p class="category-card__subtitle">Swiss Chronographs</p>
+            <a href="/collections/watches" class="btn btn-outline-white" style="align-self:flex-start;">DISCOVER WATCHES</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections List",
+  "settings": []
+}
+{% endschema %}

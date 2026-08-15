@@ -1,0 +1,62 @@
+<header class="site-header">
+  <div class="container">
+    <div class="header__inner">
+      <button type="button" class="header__icon-btn mobile-only" data-action="toggle-mobile-menu" aria-label="Toggle Navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <a href="/" class="header__logo">
+        VALERIA & CO.
+      </a>
+
+      <nav class="header__nav desktop-only" role="navigation">
+        <div class="nav__item">
+          <a href="/collections/sunglasses">SUNGLASSES</a>
+        </div>
+        <div class="nav__item">
+          <a href="/collections/watches">WATCHES</a>
+        </div>
+        <div class="nav__item">
+          <a href="/collections/couple-collection">COUPLE SETS</a>
+        </div>
+        <div class="nav__item">
+          <a href="/collections/new-arrivals">NEW ARRIVALS</a>
+        </div>
+        <div class="nav__item">
+          <a href="/collections/sale">SALE</a>
+        </div>
+      </nav>
+
+      <div class="header__icons">
+        <button type="button" class="header__icon-btn" data-action="open-search" aria-label="Search">
+          {% render 'icon-search' %}
+        </button>
+        <a href="/pages/wishlist" class="header__icon-btn" aria-label="Wishlist">
+          {% render 'icon-heart' %}
+          <span class="icon-badge wishlist-count-badge">0</span>
+        </a>
+        <a href="/account" class="header__icon-btn desktop-only" aria-label="Account">
+          {% render 'icon-user' %}
+        </a>
+        <button type="button" class="header__icon-btn" data-action="open-cart" aria-label="Cart">
+          {% render 'icon-cart' %}
+          <span class="icon-badge cart-count-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

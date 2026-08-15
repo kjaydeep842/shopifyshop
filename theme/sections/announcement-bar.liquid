@@ -1,0 +1,38 @@
+{% if section.settings.enable %}
+<div class="announcement-bar">
+  <div class="announcement-bar__content">
+    <span>{{ section.settings.text }}</span>
+  </div>
+  {% if section.settings.show_close %}
+    <button type="button" class="announcement-bar__close" aria-label="Close announcement">
+      {% render 'icon-close' %}
+    </button>
+  {% endif %}
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Show Announcement",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "COMPLIMENTARY EXPRESS SHIPPING ON ORDERS ABOVE ₹999 | VALERIA & CO."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close",
+      "label": "Show Close Button",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

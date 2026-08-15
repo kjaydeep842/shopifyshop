@@ -1,0 +1,162 @@
+<section class="section main-collection-section">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+
+    <div class="collection-header" style="margin-bottom:40px;text-align:center;">
+      <h1 class="heading-lg" style="margin-bottom:8px;">{{ collection.title | default: "ALL LUXURY PRODUCTS" }}</h1>
+      <p style="color:var(--color-text-secondary);max-width:600px;margin:0 auto;">
+        {{ collection.description | default: "Explore our masterfully designed collection of luxury eyewear, Swiss movement watches, and matching couple sets." }}
+      </p>
+    </div>
+
+    <!-- Collection Toolbar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);margin-bottom:32px;">
+      <div style="font-size:0.875rem;color:var(--color-text-muted);">
+        Showing {{ collection.products_count | default: 4 }} products
+      </div>
+
+      <div style="display:flex;align-items:center;gap:16px;">
+        <label for="SortBy" style="font-size:0.85rem;font-weight:500;">Sort By:</label>
+        <select id="SortBy" style="padding:8px 12px;border:1px solid var(--color-border);border-radius:4px;font-family:var(--font-body);font-size:0.85rem;">
+          <option value="manual">Featured</option>
+          <option value="best-selling">Best Selling</option>
+          <option value="price-ascending">Price: Low to High</option>
+          <option value="price-descending">Price: High to Low</option>
+          <option value="created-descending">Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="product-grid">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        {% comment %} Sample Luxury Product Cards {% endcomment %}
+        <div class="product-card">
+          <div class="product-card__media">
+            <span class="badge badge-sale" style="position:absolute;top:12px;left:12px;z-index:2;">-25% OFF</span>
+            <button type="button" class="product-card__wishlist" data-wishlist-toggle data-product-id="1" data-product-title="MONARCH POLARIZED SUNGLASSES" data-product-price="₹2,999.00" data-product-image="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80">
+              {% render 'icon-heart' %}
+            </button>
+            <img 
+              src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" 
+              class="product-card__img" 
+              alt="Monarch Black Polarized"
+              style="cursor:pointer;"
+              onclick="openQuickView({id:1,title:'MONARCH POLARIZED SUNGLASSES',price:'₹2,999.00',comparePrice:'₹3,999.00',image:'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80',description:'Architectural square frame handcrafted from premium Italian bio-acetate with anti-reflective polarized UV400 lenses.'})"
+            >
+          </div>
+          <div class="product-card__content">
+            <div 
+              class="product-card__title" 
+              style="cursor:pointer;"
+              onclick="openQuickView({id:1,title:'MONARCH POLARIZED SUNGLASSES',price:'₹2,999.00',comparePrice:'₹3,999.00',image:'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80',description:'Architectural square frame handcrafted from premium Italian bio-acetate with anti-reflective polarized UV400 lenses.'})"
+            >MONARCH POLARIZED SUNGLASSES</div>
+            <div class="product-card__rating">{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %} (4.9)</div>
+            <div class="product-card__price"><span class="price__regular">₹2,999.00</span><span class="price__compare">₹3,999.00</span></div>
+            <div style="margin-top:14px;">
+              <form method="post" action="/cart/add" data-product-title="MONARCH POLARIZED SUNGLASSES" data-product-price="2999" data-product-image="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80">
+                <button type="submit" class="btn btn-primary btn-full" style="padding:10px 16px;font-size:0.75rem;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card__media">
+            <span class="badge badge-new" style="position:absolute;top:12px;left:12px;z-index:2;">NEW</span>
+            <button type="button" class="product-card__wishlist" data-wishlist-toggle data-product-id="2" data-product-title="LUMIÈRE CHRONOGRAPH GOLD" data-product-price="₹8,499.00" data-product-image="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80">
+              {% render 'icon-heart' %}
+            </button>
+            <img 
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" 
+              class="product-card__img" 
+              alt="Lumiere Gold Watch"
+              style="cursor:pointer;"
+              onclick="openQuickView({id:2,title:'LUMIÈRE CHRONOGRAPH GOLD',price:'₹8,499.00',image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',description:'Precision automatic chronograph featuring scratch-resistant sapphire crystal and 18K rose gold PVD coating.'})"
+            >
+          </div>
+          <div class="product-card__content">
+            <div 
+              class="product-card__title" 
+              style="cursor:pointer;"
+              onclick="openQuickView({id:2,title:'LUMIÈRE CHRONOGRAPH GOLD',price:'₹8,499.00',image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',description:'Precision automatic chronograph featuring scratch-resistant sapphire crystal and 18K rose gold PVD coating.'})"
+            >LUMIÈRE CHRONOGRAPH GOLD</div>
+            <div class="product-card__rating">{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %} (5.0)</div>
+            <div class="product-card__price"><span class="price__regular">₹8,499.00</span></div>
+            <div style="margin-top:14px;">
+              <form method="post" action="/cart/add" data-product-title="LUMIÈRE CHRONOGRAPH GOLD" data-product-price="8499" data-product-image="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80">
+                <button type="submit" class="btn btn-primary btn-full" style="padding:10px 16px;font-size:0.75rem;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card__media">
+            <button type="button" class="product-card__wishlist" data-wishlist-toggle data-product-id="3" data-product-title="DUO ROYAL COUPLE WATCH SET" data-product-price="₹12,999.00" data-product-image="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80">
+              {% render 'icon-heart' %}
+            </button>
+            <img 
+              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" 
+              class="product-card__img" 
+              alt="His and Her Couple Watch Set"
+              style="cursor:pointer;"
+              onclick="openQuickView({id:3,title:'DUO ROYAL COUPLE WATCH SET',price:'₹12,999.00',comparePrice:'₹15,999.00',image:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80',description:'Matching his & her luxury wristwatches delivered in a handcrafted mahogany presentation velvet box.'})"
+            >
+          </div>
+          <div class="product-card__content">
+            <div 
+              class="product-card__title" 
+              style="cursor:pointer;"
+              onclick="openQuickView({id:3,title:'DUO ROYAL COUPLE WATCH SET',price:'₹12,999.00',comparePrice:'₹15,999.00',image:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80',description:'Matching his & her luxury wristwatches delivered in a handcrafted mahogany presentation velvet box.'})"
+            >DUO ROYAL COUPLE WATCH SET</div>
+            <div class="product-card__rating">{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %} (4.8)</div>
+            <div class="product-card__price"><span class="price__regular">₹12,999.00</span><span class="price__compare">₹15,999.00</span></div>
+            <div style="margin-top:14px;">
+              <form method="post" action="/cart/add" data-product-title="DUO ROYAL COUPLE WATCH SET" data-product-price="12999" data-product-image="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80">
+                <button type="submit" class="btn btn-primary btn-full" style="padding:10px 16px;font-size:0.75rem;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card__media">
+            <button type="button" class="product-card__wishlist" data-wishlist-toggle data-product-id="4" data-product-title="AURELIA GOLD SQUARE FRAMES" data-product-price="₹3,299.00" data-product-image="https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80">
+              {% render 'icon-heart' %}
+            </button>
+            <img 
+              src="https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80" 
+              class="product-card__img" 
+              alt="Aurelia Gold Square Frames"
+              style="cursor:pointer;"
+              onclick="openQuickView({id:4,title:'AURELIA GOLD SQUARE FRAMES',price:'₹3,299.00',image:'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80',description:'Ultra-lightweight titanium tear-drop frames with gradient champagne UV400 lenses.'})"
+            >
+          </div>
+          <div class="product-card__content">
+            <div 
+              class="product-card__title" 
+              style="cursor:pointer;"
+              onclick="openQuickView({id:4,title:'AURELIA GOLD SQUARE FRAMES',price:'₹3,299.00',image:'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80',description:'Ultra-lightweight titanium tear-drop frames with gradient champagne UV400 lenses.'})"
+            >AURELIA GOLD SQUARE FRAMES</div>
+            <div class="product-card__rating">{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %} (4.9)</div>
+            <div class="product-card__price"><span class="price__regular">₹3,299.00</span></div>
+            <div style="margin-top:14px;">
+              <form method="post" action="/cart/add" data-product-title="AURELIA GOLD SQUARE FRAMES" data-product-price="3299" data-product-image="https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80">
+                <button type="submit" class="btn btn-primary btn-full" style="padding:10px 16px;font-size:0.75rem;">ADD TO CART</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": []
+}
+{% endschema %}

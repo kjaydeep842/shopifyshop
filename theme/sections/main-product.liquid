@@ -1,0 +1,90 @@
+<section class="section main-product-section">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+
+    <div class="product-detail-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+      <!-- Product Gallery -->
+      <div class="product-gallery">
+        <div style="background:var(--color-bg-secondary);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px;">
+          <img id="MainProductImage" src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}" style="width:100%;height:auto;object-fit:cover;">
+        </div>
+        {% if product.images.size > 1 %}
+          <div class="product-thumbnails" style="display:flex;gap:12px;overflow-x:auto;">
+            {% for image in product.images %}
+              <img 
+                src="{{ image | image_url: width: 200 }}" 
+                alt="{{ product.title | escape }}" 
+                style="width:80px;height:100px;object-fit:cover;border-radius:4px;cursor:pointer;border:1px solid var(--color-border);"
+                onclick="document.getElementById('MainProductImage').src='{{ image | image_url: width: 1000 }}'"
+              >
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product Details & ATC Form -->
+      <div class="product-info">
+        <div class="subheading">VALERIA & CO. SIGNATURE</div>
+        <h1 class="heading-lg" style="margin-bottom:12px;">{{ product.title }}</h1>
+
+        <div class="product-card__rating" style="margin-bottom:16px;">
+          {% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}{% render 'icon-star' %}
+          <span style="color:var(--color-text-muted);font-size:0.8rem;margin-left:6px;">(48 verified reviews)</span>
+        </div>
+
+        <div style="font-size:1.5rem;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+          <span>{{ product.price | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span style="font-size:1.1rem;color:var(--color-text-muted);text-decoration:line-through;">{{ product.compare_at_price | money }}</span>
+            <span class="badge badge-sale">SAVE {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
+          {% endif %}
+        </div>
+
+        <p style="color:var(--color-text-secondary);margin-bottom:32px;line-height:1.7;">
+          {{ product.description | strip_html | truncatewords: 40 }}
+        </p>
+
+        <form method="post" action="/cart/add" style="margin-bottom:32px;">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          
+          <div style="display:flex;gap:16px;margin-bottom:16px;">
+            <div style="display:inline-flex;align-items:center;border:1px solid var(--color-border);border-radius:4px;">
+              <button type="button" class="qty-btn" onclick="let input=this.nextElementSibling; if(input.value>1) input.value--;">-</button>
+              <input type="number" name="quantity" value="1" min="1" class="qty-input" style="width:40px;text-align:center;border:none;">
+              <button type="button" class="qty-btn" onclick="let input=this.previousElementSibling; input.value++;">+</button>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="flex-grow:1;">ADD TO CART</button>
+            
+            <button type="button" class="btn btn-secondary" data-wishlist-toggle data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-price="{{ product.price | money }}" data-product-image="{{ product.featured_image | image_url: width: 400 }}">
+              {% render 'icon-heart' %}
+            </button>
+          </div>
+
+          <button type="submit" onclick="this.form.action='/cart/add?return_to=/checkout';" class="btn btn-secondary btn-full" style="background:var(--color-accent);color:#fff;border-color:var(--color-accent);margin-top:12px;">BUY IT NOW</button>
+        </form>
+
+        {% render 'metafields', product: product %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Sticky Add To Cart Bar -->
+<div class="mobile-sticky-atc">
+  <div>
+    <div style="font-size:0.85rem;font-weight:600;">{{ product.title }}</div>
+    <div style="font-size:0.8rem;color:var(--color-accent);">{{ product.price | money }}</div>
+  </div>
+  <form method="post" action="/cart/add">
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" class="btn btn-primary" style="padding:10px 20px;font-size:0.75rem;">ADD TO CART</button>
+  </form>
+</div>
+
+{% schema %}
+{
+  "name": "Main Product Page",
+  "settings": []
+}
+{% endschema %}

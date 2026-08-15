@@ -1,0 +1,30 @@
+{
+  "general": {
+    "search": "Search luxury eyewear, watches...",
+    "cart": "Cart",
+    "wishlist": "Wishlist",
+    "account": "Account",
+    "close": "Close",
+    "menu": "Menu"
+  },
+  "products": {
+    "add_to_cart": "Add to Cart",
+    "buy_now": "Buy Now",
+    "sold_out": "Sold Out",
+    "sale": "Sale",
+    "new": "New Arrival",
+    "price": "Price",
+    "regular_price": "Regular Price",
+    "sale_price": "Sale Price",
+    "specifications": "Specifications",
+    "reviews": "Customer Reviews"
+  },
+  "cart": {
+    "title": "Your Shopping Bag",
+    "empty": "Your cart is currently empty.",
+    "subtotal": "Subtotal",
+    "checkout": "Proceed to Checkout",
+    "continue_shopping": "Continue Shopping",
+    "free_shipping_unlocked": "You have unlocked complimentary express shipping!"
+  }
+}

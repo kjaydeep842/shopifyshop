@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VALERIA & CO. — Luxury Fashion, Eyewear & Watches</title>
+  <meta name="description" content="Handcrafted luxury sunglasses, Swiss chronographs, and matching couple collection accessories.">
+  <link rel="stylesheet" href="theme/assets/theme.css">
+  <style>
+    /* Custom enhancements for interactive preview */
+    .filter-btn {
+      padding: 8px 18px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      background: var(--color-bg-surface);
+      color: var(--color-text-primary);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+    .filter-btn.is-active, .filter-btn:hover {
+      background: var(--color-text-primary);
+      color: var(--color-text-light);
+      border-color: var(--color-text-primary);
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 15, 16, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-card {
+      background: var(--color-bg-surface);
+      width: 100%;
+      max-width: 900px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="announcement-bar__content">
+      <span>COMPLIMENTARY EXPRESS SHIPPING ON ORDERS ABOVE ₹999 | VALERIA & CO.</span>
+    </div>
+    <button type="button" class="announcement-bar__close" onclick="this.parentElement.style.display='none';" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header__inner">
+        <button type="button" class="header__icon-btn mobile-only" onclick="toggleMobileMenu()" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <a href="#" class="header__logo" onclick="filterCategory('all'); return false;">
+          VALERIA & CO.
+        </a>
+
+        <nav class="header__nav desktop-only">
+          <div class="nav__item"><a href="#catalog" onclick="filterCategory('sunglasses')">SUNGLASSES</a></div>
+          <div class="nav__item"><a href="#catalog" onclick="filterCategory('watches')">WATCHES</a></div>
+          <div class="nav__item"><a href="#catalog" onclick="filterCategory('couple')">COUPLE SETS</a></div>
+          <div class="nav__item"><a href="#catalog" onclick="filterCategory('accessories')">ACCESSORIES</a></div>
+          <div class="nav__item"><a href="#lookbook">LOOKBOOK</a></div>
+        </nav>
+
+        <div class="header__icons">
+          <button type="button" class="header__icon-btn" onclick="openSearchModal()" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <button type="button" class="header__icon-btn" onclick="openWishlistModal()" aria-label="Wishlist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="icon-badge wishlist-count-badge">0</span>
+          </button>
+          <button type="button" class="header__icon-btn" onclick="openCartDrawer()" aria-label="Cart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="icon-badge cart-count-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=2000&q=85" alt="Valeria Luxury Hero" class="hero-banner__bg">
+    <div class="hero-banner__overlay"></div>
+    <div class="container" style="height:100%;display:flex;align-items:center;">
+      <div class="hero-banner__content">
+        <div class="subheading">NEW SEASON 2026 COLLECTION</div>
+        <h1 class="heading-xl hero-banner__title">DEFINE YOUR SIGNATURE LOOK</h1>
+        <p class="hero-banner__desc">Handcrafted luxury eyewear, Swiss chronographs, and matching couple collections designed for modern elegance.</p>
+        <div class="hero-banner__ctas">
+          <a href="#catalog" onclick="filterCategory('sunglasses')" class="btn btn-primary">SHOP SUNGLASSES</a>
+          <a href="#catalog" onclick="filterCategory('watches')" class="btn btn-outline-white">EXPLORE WATCHES</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP Benefits -->
+  <section class="benefits-section">
+    <div class="container">
+      <div class="benefits__grid">
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          </div>
+          <div>
+            <h3 class="benefit-card__title">FREE EXPRESS SHIPPING</h3>
+            <p class="benefit-card__desc">Complimentary shipping on orders over ₹999 across India & Global.</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <div>
+            <h3 class="benefit-card__title">SECURE ENCRYPTED PAYMENTS</h3>
+            <p class="benefit-card__desc">100% PCI-DSS compliant checkout with instant order confirmation.</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          </div>
+          <div>
+            <h3 class="benefit-card__title">EASY 14-DAY RETURNS</h3>
+            <p class="benefit-card__desc">Hassle-free exchange policy on all luxury purchases.</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <h3 class="benefit-card__title">1-YEAR WARRANTY</h3>
+            <p class="benefit-card__desc">Comprehensive manufacturing warranty on all frames & movements.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Cards -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="subheading">CURATED SELECTION</div>
+        <h2 class="heading-lg section-header__title">EXPLORE CATEGORIES</h2>
+      </div>
+      <div class="category-grid">
+        <div class="category-card" onclick="filterCategory('sunglasses')">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=85" alt="Sunglasses">
+          <div class="category-card__overlay">
+            <h3 class="heading-md category-card__title">LUXURY EYEWEAR</h3>
+            <p class="category-card__subtitle">UV400 Polarized Frames</p>
+            <a href="#catalog" class="btn btn-outline-white" style="align-self:flex-start;">SHOP SUNGLASSES</a>
+          </div>
+        </div>
+        <div class="category-card" onclick="filterCategory('watches')">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=85" alt="Timepieces">
+          <div class="category-card__overlay">
+            <h3 class="heading-md category-card__title">PRECISION TIMEPIECES</h3>
+            <p class="category-card__subtitle">Sapphire Crystal Chronographs</p>
+            <a href="#catalog" class="btn btn-outline-white" style="align-self:flex-start;">DISCOVER WATCHES</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Catalog & Filters -->
+  <section id="catalog" class="section" style="background-color:var(--color-bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <div class="subheading">OUR EXCLUSIVE CATALOG</div>
+        <h2 class="heading-lg section-header__title">FEATURED COLLECTION</h2>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:36px;flex-wrap:wrap;">
+        <button type="button" class="filter-btn is-active" onclick="filterCategory('all', this)">All Products</button>
+        <button type="button" class="filter-btn" onclick="filterCategory('sunglasses', this)">Sunglasses</button>
+        <button type="button" class="filter-btn" onclick="filterCategory('watches', this)">Watches</button>
+        <button type="button" class="filter-btn" onclick="filterCategory('couple', this)">Couple Sets</button>
+        <button type="button" class="filter-btn" onclick="filterCategory('accessories', this)">Accessories</button>
+      </div>
+
+      <div id="ProductGrid" class="product-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop The Look Section -->
+  <section id="lookbook" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="subheading">EDITORIAL LOOKBOOK</div>
+        <h2 class="heading-lg section-header__title">SHOP THE LOOK</h2>
+      </div>
+      <div class="shop-look">
+        <div class="shop-look__canvas">
+          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=85" alt="Lookbook" style="width:100%;height:560px;object-fit:cover;">
+          
+          <button type="button" class="shop-look__hotspot" style="top:35%;left:48%;" onclick="togglePopover('pop1')">+</button>
+          <div id="pop1" class="shop-look__popover" style="top:40%;left:48%;">
+            <div style="font-weight:600;font-size:0.875rem;">VALERIA MONARCH BLACK</div>
+            <div style="color:var(--color-accent);font-size:0.85rem;margin:4px 0 8px 0;">₹2,999.00</div>
+            <button type="button" class="btn btn-primary" style="padding:6px 12px;font-size:0.7rem;width:100%;" onclick="openProductModal(1)">QUICK VIEW</button>
+          </div>
+
+          <button type="button" class="shop-look__hotspot" style="top:65%;left:54%;" onclick="togglePopover('pop2')">+</button>
+          <div id="pop2" class="shop-look__popover" style="top:70%;left:54%;">
+            <div style="font-weight:600;font-size:0.875rem;">LUMIÈRE CHRONOGRAPH GOLD</div>
+            <div style="color:var(--color-accent);font-size:0.85rem;margin:4px 0 8px 0;">₹8,499.00</div>
+            <button type="button" class="btn btn-primary" style="padding:6px 12px;font-size:0.7rem;width:100%;" onclick="openProductModal(2)">QUICK VIEW</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Reviews -->
+  <section class="section" style="background:var(--color-bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <div class="subheading">CLIENT VERDICTS</div>
+        <h2 class="heading-lg section-header__title">WHAT OUR CLIENTS SAY</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;">
+        <div style="background:#fff;padding:28px;border-radius:8px;border:1px solid #E5E0D8;">
+          <div style="color:#C5A880;margin-bottom:12px;">★★★★★</div>
+          <p style="font-style:italic;font-size:0.9rem;margin-bottom:16px;">"The quality of the Monarch polarized frame is comparable to top Italian heritage fashion houses. Exceeded my expectations!"</p>
+          <div style="font-weight:600;font-size:0.85rem;">- Rohan V. <span style="color:#2E7D32;font-size:0.75rem;">✓ Verified Buyer</span></div>
+        </div>
+        <div style="background:#fff;padding:28px;border-radius:8px;border:1px solid #E5E0D8;">
+          <div style="color:#C5A880;margin-bottom:12px;">★★★★★</div>
+          <p style="font-style:italic;font-size:0.9rem;margin-bottom:16px;">"Purchased the Couple Chronograph Watch Set for our anniversary. The presentation box and gold finish are breathtaking."</p>
+          <div style="font-weight:600;font-size:0.85rem;">- Ananya & Vikram <span style="color:#2E7D32;font-size:0.75rem;">✓ Verified Buyer</span></div>
+        </div>
+        <div style="background:#fff;padding:28px;border-radius:8px;border:1px solid #E5E0D8;">
+          <div style="color:#C5A880;margin-bottom:12px;">★★★★★</div>
+          <p style="font-style:italic;font-size:0.9rem;margin-bottom:16px;">"Fast delivery in 2 days, exquisite velvet packaging, and crisp anti-glare lenses. 10/10 shopping experience!"</p>
+          <div style="font-weight:600;font-size:0.85rem;">- Devina K. <span style="color:#2E7D32;font-size:0.75rem;">✓ Verified Buyer</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div style="font-family:var(--font-heading);font-size:1.5rem;letter-spacing:0.15em;margin-bottom:16px;color:#fff;">VALERIA & CO.</div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:20px;">Redefining modern luxury fashion eyewear, fine timepieces, and matching couple accessories.</p>
+        </div>
+        <div>
+          <h4 class="footer__col-title">SHOP</h4>
+          <ul class="footer__links">
+            <li><a href="#catalog" onclick="filterCategory('sunglasses')">Sunglasses</a></li>
+            <li><a href="#catalog" onclick="filterCategory('watches')">Watches</a></li>
+            <li><a href="#catalog" onclick="filterCategory('couple')">Couple Collection</a></li>
+            <li><a href="#catalog" onclick="filterCategory('accessories')">Accessories</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">INFORMATION</h4>
+          <ul class="footer__links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQ & Warranty</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">LEGAL</h4>
+          <ul class="footer__links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">NEWSLETTER</h4>
+          <p style="font-size:0.825rem;color:rgba(255,255,255,0.7);margin-bottom:12px;">Subscribe for VIP private sales & new collection updates.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Valeria & Co.!');">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn btn-primary" style="padding:12px 16px;">JOIN</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div>&copy; 2026 VALERIA & CO. All Rights Reserved.</div>
+        <div>Shopify OS 2.0 Store Theme</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AJAX Cart Drawer -->
+  <div id="CartDrawerBackdrop" class="cart-drawer-backdrop" onclick="closeCartDrawer()"></div>
+  <div id="CartDrawer" class="cart-drawer">
+    <div class="cart-drawer__header">
+      <h2 class="heading-sm" style="margin:0;">YOUR SHOPPING BAG (<span class="cart-count-badge">0</span>)</h2>
+      <button type="button" onclick="closeCartDrawer()" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="cart-drawer__shipping-bar">
+      <div id="ShippingMsg" class="shipping-bar__text">Add ₹999 more for FREE Shipping</div>
+      <div class="shipping-progress">
+        <div id="ShippingFill" class="shipping-progress__fill" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div id="CartDrawerItems" class="cart-drawer__items">
+      <!-- Items dynamically populated -->
+    </div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span>SUBTOTAL</span>
+        <span id="CartDrawerSubtotal">₹0.00</span>
+      </div>
+      <button type="button" class="btn btn-primary btn-full" onclick="alert('Proceeding to Shopify Secure Checkout!')">PROCEED TO CHECKOUT</button>
+    </div>
+  </div>
+
+  <!-- Predictive Search Modal -->
+  <div id="SearchModal" class="search-modal" onclick="if(event.target===this) closeSearchModal();">
+    <div class="search-container">
+      <div class="search-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="SearchInput" class="search-input" placeholder="Search sunglasses, watches, couple sets..." oninput="handleSearch(this.value)">
+        <button type="button" onclick="closeSearchModal()" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div id="SearchResults" class="search-results">
+        <p class="text-muted" style="font-size:0.85rem;color:var(--color-text-muted);">Start typing to discover products...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wishlist Modal -->
+  <div id="WishlistModal" class="modal-backdrop" onclick="if(event.target===this) closeWishlistModal();">
+    <div class="modal-card" style="padding:32px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+        <h2 class="heading-md" style="margin:0;">YOUR WISHLIST</h2>
+        <button type="button" onclick="closeWishlistModal()" style="font-size:1.2rem;">✕</button>
+      </div>
+      <div id="WishlistItemsGrid" class="product-grid">
+        <!-- Wishlist items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div id="ProductModal" class="modal-backdrop" onclick="if(event.target===this) closeProductModal();">
+    <div id="ProductModalCard" class="modal-card" style="padding:32px;">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+
+  <!-- Interactive Application State & Data Script -->
+  <script>
+    const PRODUCTS = [
+      {
+        id: 1,
+        title: "VALERIA MONARCH BLACK",
+        category: "sunglasses",
+        price: 2999,
+        comparePrice: 3999,
+        badge: "SALE",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+        description: "Architectural square frame handcrafted from premium Italian bio-acetate with anti-reflective polarized UV400 lenses.",
+        specs: { frame: "Italian Bio-Acetate", lens: "Polarized Smoke Grey", warranty: "1 Year", origin: "Italy" }
+      },
+      {
+        id: 2,
+        title: "LUMIÈRE CHRONOGRAPH GOLD",
+        category: "watches",
+        price: 8499,
+        comparePrice: 9999,
+        badge: "NEW",
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+        description: "Precision automatic chronograph featuring scratch-resistant sapphire crystal and 18K rose gold PVD coating.",
+        specs: { frame: "316L Stainless Steel", lens: "Sapphire Crystal", warranty: "2 Years", origin: "Switzerland" }
+      },
+      {
+        id: 3,
+        title: "DUO ROYAL COUPLE WATCH SET",
+        category: "couple",
+        price: 12999,
+        comparePrice: 15999,
+        badge: "BESTSELLER",
+        image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+        description: "Matching his & her luxury luxury wristwatches delivered in a handcrafted piano-finish mahogany presentation velvet box.",
+        specs: { frame: "Dual Rose Gold Steel", lens: "Mineral Crystal", warranty: "2 Years", origin: "Switzerland" }
+      },
+      {
+        id: 4,
+        title: "AURELIA GOLD AVIATOR",
+        category: "sunglasses",
+        price: 3499,
+        comparePrice: 4499,
+        badge: "SALE",
+        image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80",
+        description: "Ultra-lightweight titanium tear-drop aviator with gradient champagne UV400 lenses.",
+        specs: { frame: "Japanese Titanium", lens: "Champagne Gradient", warranty: "1 Year", origin: "Japan" }
+      },
+      {
+        id: 5,
+        title: "SILK HERITAGE SCARF & CLIP",
+        category: "accessories",
+        price: 1999,
+        comparePrice: 2499,
+        badge: "NEW",
+        image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=800&q=80",
+        description: "100% Mulberry silk handcrafted fashion scarf paired with a gold monogrammed luxury clip.",
+        specs: { frame: "100% Mulberry Silk", lens: "N/A", warranty: "6 Months", origin: "Italy" }
+      },
+      {
+        id: 6,
+        title: "VALERIA ECLIPSE OVERSIZED",
+        category: "sunglasses",
+        price: 3199,
+        comparePrice: 3999,
+        badge: "TRENDING",
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+        description: "Bold dramatic oversized silhouette with gradient black lenses for an unmistakable luxury presence.",
+        specs: { frame: "High-Density Acetate", lens: "Dark Gradient", warranty: "1 Year", origin: "Italy" }
+      }
+    ];
+
+    let cart = [];
+    let wishlist = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts(PRODUCTS);
+      updateCartUI();
+      updateWishlistUI();
+    });
+
+    function renderProducts(list) {
+      const container = document.getElementById('ProductGrid');
+      if (!container) return;
+      
+      container.innerHTML = list.map(p => `
+        <div class="product-card">
+          <div class="product-card__media">
+            <span class="badge badge-sale" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badge}</span>
+            <button type="button" class="product-card__wishlist ${wishlist.includes(p.id)?'is-active':''}" onclick="toggleWishlist(${p.id})">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </button>
+            <img src="${p.image}" alt="${p.title}" class="product-card__img" onclick="openProductModal(${p.id})">
+            <div class="product-card__quick-add">
+              <button type="button" class="btn btn-primary btn-full" onclick="addToCart(${p.id})">QUICK ADD</button>
+            </div>
+          </div>
+          <div class="product-card__content">
+            <div class="product-card__title" onclick="openProductModal(${p.id})" style="cursor:pointer;">${p.title}</div>
+            <div class="product-card__rating">★★★★★ <span style="color:#8E8E93;">(4.9)</span></div>
+            <div class="product-card__price">
+              <span class="price__regular">₹${p.price.toLocaleString()}</span>
+              <span class="price__compare">₹${p.comparePrice.toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCategory(cat, btn) {
+      if (btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      }
+      if (cat === 'all') renderProducts(PRODUCTS);
+      else renderProducts(PRODUCTS.filter(p => p.category === cat));
+    }
+
+    function addToCart(id) {
+      const item = PRODUCTS.find(p => p.id === id);
+      const existing = cart.find(c => c.id === id);
+      if (existing) existing.qty++;
+      else cart.push({ ...item, qty: 1 });
+      
+      updateCartUI();
+      openCartDrawer();
+      showNotification('Added to Shopping Bag!');
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((acc, c) => acc + c.qty, 0);
+      const subtotal = cart.reduce((acc, c) => acc + (c.price * c.qty), 0);
+
+      document.querySelectorAll('.cart-count-badge').forEach(b => b.textContent = totalCount);
+      document.getElementById('CartDrawerSubtotal').textContent = `₹${subtotal.toLocaleString()}`;
+
+      // Free shipping progress (₹999)
+      const fill = document.getElementById('ShippingFill');
+      const msg = document.getElementById('ShippingMsg');
+      const pct = Math.min((subtotal / 999) * 100, 100);
+      fill.style.width = pct + '%';
+      if (pct >= 100) {
+        msg.textContent = "You've unlocked FREE Express Shipping!";
+      } else {
+        msg.textContent = `Add ₹${(999 - subtotal).toLocaleString()} more for FREE Shipping`;
+      }
+
+      const itemsContainer = document.getElementById('CartDrawerItems');
+      if (cart.length === 0) {
+        itemsContainer.innerHTML = '<p class="text-muted" style="text-align:center;padding:40px 0;">Your shopping bag is empty.</p>';
+      } else {
+        itemsContainer.innerHTML = cart.map(c => `
+          <div class="cart-item">
+            <img src="${c.image}" class="cart-item__img" />
+            <div class="cart-item__details">
+              <div class="cart-item__title">${c.title}</div>
+              <div style="font-weight:600;font-size:0.85rem;color:var(--color-accent);">₹${c.price.toLocaleString()}</div>
+              <div class="cart-item__qty">
+                <button type="button" class="qty-btn" onclick="changeQty(${c.id}, -1)">-</button>
+                <span class="qty-input" style="line-height:28px;text-align:center;">${c.qty}</span>
+                <button type="button" class="qty-btn" onclick="changeQty(${c.id}, 1)">+</button>
+              </div>
+            </div>
+            <button type="button" onclick="removeFromCart(${c.id})" style="color:var(--color-text-muted);">✕</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+      updateCartUI();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(c => c.id !== id);
+      updateCartUI();
+    }
+
+    function toggleWishlist(id) {
+      if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(w => w !== id);
+        showNotification('Removed from Wishlist');
+      } else {
+        wishlist.push(id);
+        showNotification('Saved to Wishlist!');
+      }
+      updateWishlistUI();
+      renderProducts(PRODUCTS);
+    }
+
+    function updateWishlistUI() {
+      document.querySelectorAll('.wishlist-count-badge').forEach(b => b.textContent = wishlist.length);
+    }
+
+    function openCartDrawer() {
+      document.getElementById('CartDrawer').classList.add('is-active');
+      document.getElementById('CartDrawerBackdrop').classList.add('is-active');
+    }
+    function closeCartDrawer() {
+      document.getElementById('CartDrawer').classList.remove('is-active');
+      document.getElementById('CartDrawerBackdrop').classList.remove('is-active');
+    }
+
+    function openSearchModal() {
+      document.getElementById('SearchModal').classList.add('is-active');
+      document.getElementById('SearchInput').focus();
+    }
+    function closeSearchModal() {
+      document.getElementById('SearchModal').classList.remove('is-active');
+    }
+
+    function handleSearch(query) {
+      const res = document.getElementById('SearchResults');
+      if (query.trim().length < 2) {
+        res.innerHTML = '<p class="text-muted" style="font-size:0.85rem;color:var(--color-text-muted);">Start typing to discover products...</p>';
+        return;
+      }
+      const matches = PRODUCTS.filter(p => p.title.toLowerCase().includes(query.toLowerCase()));
+      if (matches.length === 0) {
+        res.innerHTML = '<p>No matching products found.</p>';
+      } else {
+        res.innerHTML = matches.map(p => `
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eee;cursor:pointer;" onclick="closeSearchModal(); openProductModal(${p.id});">
+            <img src="${p.image}" style="width:48px;height:48px;object-fit:cover;border-radius:4px;" />
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;">${p.title}</div>
+              <div style="color:#C5A880;font-size:0.85rem;">₹${p.price.toLocaleString()}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function openWishlistModal() {
+      const container = document.getElementById('WishlistItemsGrid');
+      const items = PRODUCTS.filter(p => wishlist.includes(p.id));
+      if (items.length === 0) {
+        container.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#888;">Your wishlist is currently empty.</p>';
+      } else {
+        container.innerHTML = items.map(p => `
+          <div class="product-card">
+            <img src="${p.image}" class="product-card__img" />
+            <div class="product-card__content">
+              <div class="product-card__title">${p.title}</div>
+              <div style="font-weight:600;color:var(--color-accent);margin-bottom:12px;">₹${p.price.toLocaleString()}</div>
+              <button type="button" class="btn btn-primary btn-full" onclick="addToCart(${p.id}); closeWishlistModal();">ADD TO BAG</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      document.getElementById('WishlistModal').classList.add('is-active');
+    }
+    function closeWishlistModal() {
+      document.getElementById('WishlistModal').classList.remove('is-active');
+    }
+
+    function openProductModal(id) {
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p) return;
+      const card = document.getElementById('ProductModalCard');
+      card.innerHTML = `
+        <button type="button" onclick="closeProductModal()" style="position:absolute;top:16px;right:16px;font-size:1.2rem;z-index:10;">✕</button>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+          <div>
+            <img src="${p.image}" style="width:100%;border-radius:8px;object-fit:cover;" />
+          </div>
+          <div>
+            <div class="subheading">VALERIA & CO. SIGNATURE</div>
+            <h2 class="heading-md" style="margin-bottom:8px;">${p.title}</h2>
+            <div style="color:var(--color-accent);margin-bottom:16px;">★★★★★ (4.9 verified rating)</div>
+            <div style="font-size:1.4rem;font-weight:600;margin-bottom:16px;">₹${p.price.toLocaleString()} <span style="font-size:1rem;color:#8E8E93;text-decoration:line-through;">₹${p.comparePrice.toLocaleString()}</span></div>
+            <p style="font-size:0.9rem;color:var(--color-text-secondary);margin-bottom:24px;">${p.description}</p>
+            
+            <div style="margin-bottom:24px;">
+              <h4 style="font-size:0.85rem;text-transform:uppercase;margin-bottom:8px;">Specifications</h4>
+              <table style="width:100%;font-size:0.8rem;color:#555;">
+                <tr><td>Frame/Material:</td><td style="font-weight:600;">${p.specs.frame}</td></tr>
+                <tr><td>Lens/Glass:</td><td style="font-weight:600;">${p.specs.lens}</td></tr>
+                <tr><td>Warranty:</td><td style="font-weight:600;">${p.specs.warranty}</td></tr>
+                <tr><td>Origin:</td><td style="font-weight:600;">${p.specs.origin}</td></tr>
+              </table>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-full" onclick="addToCart(${p.id}); closeProductModal();">ADD TO BAG</button>
+          </div>
+        </div>
+      `;
+      document.getElementById('ProductModal').classList.add('is-active');
+    }
+    function closeProductModal() {
+      document.getElementById('ProductModal').classList.remove('is-active');
+    }
+
+    function togglePopover(id) {
+      document.querySelectorAll('.shop-look__popover').forEach(p => p.classList.remove('is-active'));
+      document.getElementById(id).classList.toggle('is-active');
+    }
+
+    function showNotification(msg) {
+      const toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#0F0F10;color:#fff;padding:12px 24px;border-radius:6px;font-size:0.85rem;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.2);';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2500);
+    }
+  </script>
+</body>
+</html>

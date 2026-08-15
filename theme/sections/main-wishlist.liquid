@@ -1,0 +1,22 @@
+<section class="section main-wishlist-section">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+    
+    <div class="section-header">
+      <div class="subheading">PERSONAL SELECTION</div>
+      <h1 class="heading-lg section-header__title">YOUR WISHLIST</h1>
+      <p class="section-header__desc">Your saved luxury items stored for later.</p>
+    </div>
+
+    <div id="WishlistGrid" data-wishlist-container class="product-grid">
+      <!-- Dynamically populated by wishlist.js -->
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Wishlist",
+  "settings": []
+}
+{% endschema %}

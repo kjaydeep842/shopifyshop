@@ -1,0 +1,141 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Valeria Luxury Fashion",
+    "theme_version": "1.0.0",
+    "theme_author": "Valeria & Co. Studio",
+    "theme_documentation_url": "https://example.com/docs",
+    "theme_support_url": "https://example.com/support"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg_primary",
+        "label": "Primary Background",
+        "default": "#FAF8F5"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_secondary",
+        "label": "Secondary Background",
+        "default": "#F3EFEA"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "label": "Primary Text",
+        "default": "#0F0F10"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#C5A880"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale / Discount Color",
+        "default": "#9B2C2C"
+      }
+    ]
+  },
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_enable",
+        "label": "Enable Announcement Bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "announcement_bar_text",
+        "label": "Announcement Text",
+        "default": "COMPLIMENTARY EXPRESS SHIPPING ON ORDERS ABOVE ₹999 | VALERIA & CO."
+      },
+      {
+        "type": "url",
+        "id": "announcement_bar_link",
+        "label": "Announcement Link"
+      }
+    ]
+  },
+  {
+    "name": "Header & Navigation",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Store Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo Custom Width",
+        "min": 100,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "default": 180
+      },
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Main Navigation Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_header",
+        "label": "Enable Sticky Header",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart Drawer",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold (Amount)",
+        "default": 999
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_message",
+        "label": "Free Shipping Message",
+        "default": "Free shipping on orders above ₹999"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      }
+    ]
+  }
+]

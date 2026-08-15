@@ -1,0 +1,67 @@
+<section class="section main-blog-section">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+    
+    <div class="section-header">
+      <div class="subheading">THE EDITORIAL JOURNAL</div>
+      <h1 class="heading-lg section-header__title">{{ blog.title | default: "LUXURY & STYLE JOURNAL" }}</h1>
+      <p class="section-header__desc">Style guides, horology insights, and seasonal trends.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:32px;">
+      {% for article in blog.articles %}
+        <div style="background:var(--color-bg-surface);border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--color-border);">
+          {% if article.image %}
+            <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" style="width:100%;height:220px;object-fit:cover;">
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Journal Article" style="width:100%;height:220px;object-fit:cover;">
+          {% endif %}
+          <div style="padding:24px;">
+            <div style="font-size:0.75rem;color:var(--color-accent);font-weight:600;text-transform:uppercase;margin-bottom:8px;">{{ article.published_at | date: "%b %d, %Y" }}</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.2rem;margin-bottom:12px;"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            <p style="font-size:0.85rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:16px;">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+            <a href="{{ article.url }}" style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-primary);">READ ARTICLE →</a>
+          </div>
+        </div>
+      {% else %}
+        <!-- Sample Articles -->
+        <div style="background:var(--color-bg-surface);border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--color-border);">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" style="width:100%;height:220px;object-fit:cover;">
+          <div style="padding:24px;">
+            <div style="font-size:0.75rem;color:var(--color-accent);font-weight:600;text-transform:uppercase;margin-bottom:8px;">AUG 15, 2026</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.2rem;margin-bottom:12px;">CHOOSING THE PERFECT SUNGLASS FRAME FOR YOUR FACE SHAPE</h3>
+            <p style="font-size:0.85rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:16px;">An essential guide to selecting architectural aviators and square frames that complement your jawline.</p>
+            <a href="#" style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">READ ARTICLE →</a>
+          </div>
+        </div>
+
+        <div style="background:var(--color-bg-surface);border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--color-border);">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" style="width:100%;height:220px;object-fit:cover;">
+          <div style="padding:24px;">
+            <div style="font-size:0.75rem;color:var(--color-accent);font-weight:600;text-transform:uppercase;margin-bottom:8px;">AUG 10, 2026</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.2rem;margin-bottom:12px;">THE ANATOMY OF A SWISS AUTOMATIC CHRONOGRAPH</h3>
+            <p style="font-size:0.85rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:16px;">Explore the intricate movement and sapphire crystal craftsmanship behind fine horology.</p>
+            <a href="#" style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">READ ARTICLE →</a>
+          </div>
+        </div>
+
+        <div style="background:var(--color-bg-surface);border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--color-border);">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" style="width:100%;height:220px;object-fit:cover;">
+          <div style="padding:24px;">
+            <div style="font-size:0.75rem;color:var(--color-accent);font-weight:600;text-transform:uppercase;margin-bottom:8px;">AUG 01, 2026</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.2rem;margin-bottom:12px;">MATCHING COUPLE SETS: ELEGANCE IN HARMONY</h3>
+            <p style="font-size:0.85rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:16px;">Why duo rose gold watch sets have become the ultimate luxury anniversary gift statement.</p>
+            <a href="#" style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">READ ARTICLE →</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Blog",
+  "settings": []
+}
+{% endschema %}

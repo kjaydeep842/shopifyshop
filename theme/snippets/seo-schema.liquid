@@ -1,0 +1,30 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  "url": "{{ shop.url }}"
+}
+</script>
+
+{% if template contains 'product' %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title | escape }}",
+  "image": "{{ product.featured_image | image_url: width: 1000 }}",
+  "description": "{{ product.description | strip_html | escape }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "VALERIA & CO."
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "price": "{{ product.price | money_without_currency }}",
+    "availability": "{% if product.available %}http://schema.org/InStock{% else %}http://schema.org/OutOfStock{% endif %}"
+  }
+}
+</script>
+{% endif %}

@@ -1,0 +1,17 @@
+<nav class="breadcrumbs" aria-label="breadcrumbs" style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:24px;">
+  <a href="/">Home</a>
+  {% if template contains 'product' %}
+    <span style="margin:0 8px;">/</span>
+    {% if collection %}
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+      <span style="margin:0 8px;">/</span>
+    {% endif %}
+    <span>{{ product.title }}</span>
+  {% elsif template contains 'collection' %}
+    <span style="margin:0 8px;">/</span>
+    <span>{{ collection.title }}</span>
+  {% elsif template contains 'page' %}
+    <span style="margin:0 8px;">/</span>
+    <span>{{ page.title }}</span>
+  {% endif %}
+</nav>

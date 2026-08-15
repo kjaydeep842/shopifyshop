@@ -1,0 +1,24 @@
+{% comment %}
+  Renders product metafield specifications dynamically
+{% endcomment %}
+
+<div class="product-specifications" style="margin-top:32px;">
+  <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px;font-family:var(--font-body);text-transform:uppercase;letter-spacing:0.05em;">Product Specifications</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+    {% if product.metafields.custom.frame_material %}
+      <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:10px 0;color:var(--color-text-muted);">Frame Material</td><td style="padding:10px 0;text-align:right;font-weight:500;">{{ product.metafields.custom.frame_material }}</td></tr>
+    {% endif %}
+    {% if product.metafields.custom.lens_color %}
+      <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:10px 0;color:var(--color-text-muted);">Lens Color</td><td style="padding:10px 0;text-align:right;font-weight:500;">{{ product.metafields.custom.lens_color }}</td></tr>
+    {% endif %}
+    {% if product.metafields.custom.gender %}
+      <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:10px 0;color:var(--color-text-muted);">Gender / Collection</td><td style="padding:10px 0;text-align:right;font-weight:500;">{{ product.metafields.custom.gender }}</td></tr>
+    {% endif %}
+    {% if product.metafields.custom.warranty %}
+      <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:10px 0;color:var(--color-text-muted);">Warranty</td><td style="padding:10px 0;text-align:right;font-weight:500;">{{ product.metafields.custom.warranty }}</td></tr>
+    {% endif %}
+    {% if product.metafields.custom.country_of_origin %}
+      <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:10px 0;color:var(--color-text-muted);">Country of Origin</td><td style="padding:10px 0;text-align:right;font-weight:500;">{{ product.metafields.custom.country_of_origin }}</td></tr>
+    {% endif %}
+  </table>
+</div>

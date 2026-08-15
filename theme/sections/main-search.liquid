@@ -1,0 +1,38 @@
+<section class="section main-search-section">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+    <h1 class="heading-lg" style="margin-bottom:24px;text-align:center;">
+      {% if search.performed %}
+        SEARCH RESULTS FOR "{{ search.terms | escape }}"
+      {% else %}
+        SEARCH OUR CATALOG
+      {% endif %}
+    </h1>
+
+    <div style="max-width:500px;margin:0 auto 48px auto;">
+      <form action="/search" method="get" style="display:flex;gap:8px;">
+        <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search luxury eyewear, watches..." style="flex-grow:1;padding:12px 16px;border:1px solid var(--color-border);border-radius:4px;font-family:var(--font-body);">
+        <button type="submit" class="btn btn-primary">SEARCH</button>
+      </form>
+    </div>
+
+    {% if search.performed %}
+      <div class="product-grid">
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}
+            {% render 'product-card', product: item %}
+          {% endif %}
+        {% else %}
+          <p style="grid-column:1/-1;text-align:center;color:var(--color-text-muted);">No products found matching "{{ search.terms | escape }}".</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Search",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "DEFINE YOUR SIGNATURE LOOK",
+        "subheading": "Handcrafted luxury eyewear, precision chronographs, and matching couple collections designed for modern elegance.",
+        "primary_btn_text": "SHOP SUNGLASSES",
+        "secondary_btn_text": "EXPLORE WATCHES"
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {}
+    },
+    "category_grid": {
+      "type": "category-grid",
+      "settings": {}
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "FEATURED BEST SELLERS",
+        "subheading": "ICONIC SELECTION",
+        "products_to_show": 8
+      }
+    },
+    "shop_the_look": {
+      "type": "shop-the-look",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero_banner",
+    "benefits",
+    "category_grid",
+    "featured_collection",
+    "shop_the_look",
+    "reviews"
+  ]
+}

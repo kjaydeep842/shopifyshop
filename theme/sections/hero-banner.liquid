@@ -1,0 +1,66 @@
+<section class="hero-banner">
+  <img 
+    src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=2000&q=85" 
+    alt="Valeria Luxury Sunglasses & Watches" 
+    class="hero-banner__bg"
+  >
+  <div class="hero-banner__overlay"></div>
+  <div class="container" style="height:100%;display:flex;align-items:center;">
+    <div class="hero-banner__content">
+      <div class="subheading">NEW SEASON 2026</div>
+      <h1 class="heading-xl hero-banner__title">{{ section.settings.heading | default: "DEFINE YOUR SIGNATURE LOOK" }}</h1>
+      <p class="hero-banner__desc">{{ section.settings.subheading | default: "Handcrafted luxury eyewear, precision chronographs, and matching couple collections designed for modern elegance." }}</p>
+      <div class="hero-banner__ctas">
+        <a href="{{ section.settings.primary_btn_url | default: '/collections/sunglasses' }}" class="btn btn-primary">{{ section.settings.primary_btn_text | default: "SHOP SUNGLASSES" }}</a>
+        <a href="{{ section.settings.secondary_btn_url | default: '/collections/watches' }}" class="btn btn-outline-white">{{ section.settings.secondary_btn_text | default: "EXPLORE WATCHES" }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "DEFINE YOUR SIGNATURE LOOK"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Handcrafted luxury eyewear, precision chronographs, and matching couple collections designed for modern elegance."
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_text",
+      "label": "Primary Button Text",
+      "default": "SHOP SUNGLASSES"
+    },
+    {
+      "type": "url",
+      "id": "primary_btn_url",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_text",
+      "label": "Secondary Button Text",
+      "default": "EXPLORE WATCHES"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_url",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

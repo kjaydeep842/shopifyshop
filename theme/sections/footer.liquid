@@ -1,0 +1,62 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div style="font-family:var(--font-heading);font-size:1.5rem;letter-spacing:0.15em;margin-bottom:16px;color:#fff;">VALERIA & CO.</div>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:20px;">Redefining modern luxury fashion eyewear, fine timepieces, and matching couple accessories for discerning individuals worldwide.</p>
+      </div>
+
+      <div>
+        <h4 class="footer__col-title">SHOP</h4>
+        <ul class="footer__links">
+          <li><a href="/collections/sunglasses">Sunglasses</a></li>
+          <li><a href="/collections/watches">Watches</a></li>
+          <li><a href="/collections/couple-collection">Couple Collection</a></li>
+          <li><a href="/collections/new-arrivals">New Arrivals</a></li>
+          <li><a href="/collections/best-sellers">Best Sellers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer__col-title">INFORMATION</h4>
+        <ul class="footer__links">
+          <li><a href="/pages/about">About Us</a></li>
+          <li><a href="/pages/contact">Contact Us</a></li>
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/shipping">Shipping Policy</a></li>
+          <li><a href="/pages/returns">Returns & Exchange</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer__col-title">LEGAL</h4>
+        <ul class="footer__links">
+          <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/policies/terms-of-service">Terms & Conditions</a></li>
+          <li><a href="/policies/refund-policy">Refund Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer__col-title">NEWSLETTER</h4>
+        <p style="font-size:0.825rem;color:rgba(255,255,255,0.7);margin-bottom:12px;">Subscribe for VIP private sales & new collection previews.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Valeria & Co.!');">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit" class="btn btn-primary" style="padding:12px 16px;">JOIN</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div>&copy; {{ 'now' | date: "%Y" }} VALERIA & CO. All Rights Reserved.</div>
+      <div>Designed for Shopify Online Store 2.0</div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

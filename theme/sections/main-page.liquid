@@ -1,0 +1,16 @@
+<section class="section main-page-section">
+  <div class="container" style="max-width:800px;">
+    {% render 'breadcrumbs' %}
+    <h1 class="heading-lg" style="margin-bottom:24px;">{{ page.title }}</h1>
+    <div class="page-content" style="line-height:1.8;color:var(--color-text-secondary);">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Page",
+  "settings": []
+}
+{% endschema %}

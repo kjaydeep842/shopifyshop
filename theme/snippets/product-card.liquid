@@ -1,0 +1,70 @@
+{% comment %}
+  Renders a product card
+  Accepts: product (Object), show_quick_add (Boolean)
+{% endcomment %}
+
+<div class="product-card" data-product-id="{{ product.id }}">
+  <div class="product-card__media">
+    <div class="product-card__badges">
+      {% if product.compare_at_price > product.price %}
+        {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+        <span class="badge badge-sale">-{{ discount }}% OFF</span>
+      {% endif %}
+      {% if product.tags contains 'new' or product.created_at %}
+        <span class="badge badge-new">NEW</span>
+      {% endif %}
+      {% unless product.available %}
+        <span class="badge badge-soldout">SOLD OUT</span>
+      {% endunless %}
+    </div>
+
+    <button type="button" class="product-card__wishlist" data-wishlist-toggle data-product-id="{{ product.id }}" data-product-title="{{ product.title | escape }}" data-product-price="{{ product.price | money }}" data-product-image="{{ product.featured_image | image_url: width: 400 }}" aria-label="Add to Wishlist">
+      {% render 'icon-heart' %}
+    </button>
+
+    <a href="{{ product.url }}" class="product-card__link">
+      <img 
+        src="{{ product.featured_image | image_url: width: 600 }}" 
+        alt="{{ product.featured_image.alt | default: product.title | escape }}" 
+        class="product-card__img product-card__img--primary"
+        loading="lazy" 
+        width="600" 
+        height="750"
+      >
+      {% if product.images[1] %}
+        <img 
+          src="{{ product.images[1] | image_url: width: 600 }}" 
+          alt="{{ product.images[1].alt | default: product.title | escape }}" 
+          class="product-card__img product-card__img--hover"
+          loading="lazy" 
+          width="600" 
+          height="750"
+        >
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="product-card__content">
+    <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+
+    <div class="product-card__rating">
+      {% render 'icon-star' %}
+      {% render 'icon-star' %}
+      {% render 'icon-star' %}
+      {% render 'icon-star' %}
+      {% render 'icon-star' %}
+      <span class="product-card__rating-count">(4.9)</span>
+    </div>
+
+    {% render 'price', product: product %}
+
+    <div style="margin-top:14px;">
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" class="btn btn-primary btn-full" style="padding:10px 16px;font-size:0.75rem;" {% unless product.available %}disabled{% endunless %}>
+          {% if product.available %}ADD TO CART{% else %}SOLD OUT{% endif %}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

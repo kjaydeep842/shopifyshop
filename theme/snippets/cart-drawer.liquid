@@ -1,0 +1,31 @@
+<div class="cart-drawer-backdrop"></div>
+<div class="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping Cart">
+  <div class="cart-drawer__header">
+    <h2 class="heading-sm" style="margin:0;">YOUR SHOPPING BAG (<span class="cart-count-badge">0</span>)</h2>
+    <button type="button" data-action="close-cart" aria-label="Close Cart" style="padding:8px;">
+      {% render 'icon-close' %}
+    </button>
+  </div>
+
+  <div class="cart-drawer__shipping-bar">
+    <div class="shipping-bar__text">Add ₹999 more for FREE Shipping</div>
+    <div class="shipping-progress">
+      <div class="shipping-progress__fill" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <form action="/cart" method="post" id="CartDrawerForm" style="display:flex;flex-direction:column;flex-grow:1;overflow:hidden;">
+    <div class="cart-drawer__items">
+      <p class="text-muted" style="text-align:center;padding:40px 0;">Your shopping bag is empty.</p>
+    </div>
+
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span>SUBTOTAL</span>
+        <span class="cart-drawer__subtotal-val">₹0.00</span>
+      </div>
+      <button type="submit" name="checkout" class="btn btn-primary btn-full" style="margin-bottom:12px;">PROCEED TO CHECKOUT</button>
+      <a href="/cart" class="btn btn-secondary btn-full">VIEW SHOPPING BAG</a>
+    </div>
+  </form>
+</div>

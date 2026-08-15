@@ -1,0 +1,52 @@
+<!-- Product Quick View Modal -->
+<div id="ProductQuickModal" class="modal-backdrop" onclick="if(event.target===this) closeProductQuickModal();" style="z-index:350;">
+  <div class="modal-card" style="padding:32px;max-width:850px;position:relative;">
+    <button type="button" onclick="closeProductQuickModal()" style="position:absolute;top:16px;right:16px;font-size:1.4rem;z-index:10;border:none;background:none;cursor:pointer;">✕</button>
+    <div id="ProductModalContent" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
+      <!-- Populated dynamically via JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+function openQuickView(p) {
+  const modal = document.getElementById('ProductQuickModal');
+  const content = document.getElementById('ProductModalContent');
+  if (!modal || !content) return;
+
+  content.innerHTML = `
+    <div>
+      <img id="QuickMainImg" src="${p.image}" style="width:100%;height:380px;object-fit:cover;border-radius:8px;margin-bottom:12px;" />
+    </div>
+    <div>
+      <div class="subheading">VALERIA & CO. SIGNATURE</div>
+      <h2 class="heading-md" style="margin-bottom:8px;">${p.title}</h2>
+      <div style="color:var(--color-accent);margin-bottom:12px;font-size:0.85rem;">★★★★★ (4.9 verified client rating)</div>
+      <div style="font-size:1.4rem;font-weight:600;margin-bottom:16px;">
+        ${p.price} ${p.comparePrice ? `<span style="font-size:1rem;color:var(--color-text-muted);text-decoration:line-through;margin-left:8px;">${p.comparePrice}</span>` : ''}
+      </div>
+      <p style="font-size:0.875rem;color:var(--color-text-secondary);margin-bottom:20px;line-height:1.6;">${p.description || 'Handcrafted luxury fashion piece crafted with high-precision engineering and anti-reflective coating.'}</p>
+      
+      <form method="post" action="/cart/add" data-product-title="${p.title}" data-product-price="${p.price.replace(/[^0-9]/g, '') || '2999'}" data-product-image="${p.image}" style="margin-bottom:16px;">
+        <div style="display:flex;gap:12px;margin-bottom:12px;">
+          <div style="display:inline-flex;align-items:center;border:1px solid var(--color-border);border-radius:4px;">
+            <button type="button" class="qty-btn" onclick="let i=this.nextElementSibling; if(i.value>1) i.value--;">-</button>
+            <input type="number" name="quantity" value="1" min="1" class="qty-input" style="width:36px;text-align:center;border:none;">
+            <button type="button" class="qty-btn" onclick="let i=this.previousElementSibling; i.value++;">+</button>
+          </div>
+          <button type="submit" class="btn btn-primary" style="flex-grow:1;padding:12px;">ADD TO CART</button>
+        </div>
+        <button type="submit" onclick="this.form.action='/cart/add?return_to=/checkout';" class="btn btn-secondary btn-full" style="background:var(--color-accent);color:#fff;border-color:var(--color-accent);padding:12px;">BUY IT NOW</button>
+      </form>
+    </div>
+  `;
+  modal.classList.add('is-active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductQuickModal() {
+  const modal = document.getElementById('ProductQuickModal');
+  if (modal) modal.classList.remove('is-active');
+  document.body.style.overflow = '';
+}
+</script>
